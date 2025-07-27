@@ -63,7 +63,6 @@ class FilmEkseni : MainAPI() {
 
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
-            this.score     = Score.from10(puan)
         }
     }
 
@@ -93,11 +92,10 @@ class FilmEkseni : MainAPI() {
 
                 newMovieSearchResponse(title, href, TvType.Movie) {
                     this.posterUrl = posterUrl
-                    this.score     = Score.from10(puan)
                 }
             }
         } catch (e: Exception) {
-            Log.e("Eksen", "Search error: ${e.message}", e)
+            Log.e("Eksen", "Search error: ${e.message}")
             return emptyList()
         }
     }
@@ -155,7 +153,6 @@ class FilmEkseni : MainAPI() {
             this.plot = description
             this.year = year
             this.tags = tags
-            this.score = Score.from10(rating)
             this.duration = duration
             this.recommendations = recommendations
             addActors(actors)
@@ -171,7 +168,6 @@ class FilmEkseni : MainAPI() {
 
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
-            this.score     = Score.from10(puan)
         }
     }
 
