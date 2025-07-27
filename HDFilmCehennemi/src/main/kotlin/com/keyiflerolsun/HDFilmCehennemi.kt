@@ -112,11 +112,9 @@ class HDFilmCehennemi : MainAPI() {
 
         val href      = fixUrlNull(this.attr("href")) ?: return null
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("data-src"))
-        val puan      = this.selectFirst("span.imdb")?.text()?.trim()
 
         return newMovieSearchResponse(title, href, TvType.Movie) {
             this.posterUrl = posterUrl
-            this.score     = Score.from10(puan)
         }
     }
 
@@ -137,12 +135,10 @@ class HDFilmCehennemi : MainAPI() {
             val href      = fixUrlNull(document.selectFirst("a")?.attr("href")) ?: return@forEach
             val posterUrl = fixUrlNull(document.selectFirst("img")?.attr("src")) ?:
             fixUrlNull(document.selectFirst("img")?.attr("data-src"))
-            val puan      = document.selectFirst("span.imdb")?.text()?.trim()
 
             searchResults.add(
                 newMovieSearchResponse(title, href, TvType.Movie) {
                     this.posterUrl = posterUrl?.replace("/thumb/", "/list/")
-                    this.score     = Score.from10(puan)
                 }
             )
         }
@@ -161,7 +157,6 @@ class HDFilmCehennemi : MainAPI() {
         val year        = document.selectFirst("div.post-info-year-country a")?.text()?.trim()?.toIntOrNull()
         val tvType      = if (document.select("div.seasons").isEmpty()) TvType.Movie else TvType.TvSeries
         val description = document.selectFirst("article.post-info-content > p")?.text()?.trim()
-        val rating      = document.selectFirst("div.post-info-imdb-rating span")?.text()?.substringBefore("(")?.trim()
         val actors      = document.select("div.post-info-cast a").map {
             Actor(it.selectFirst("strong")!!.text(), it.select("img").attr("data-src"))
         }
@@ -171,11 +166,9 @@ class HDFilmCehennemi : MainAPI() {
             val recHref      = fixUrlNull(it.selectFirst("a")?.attr("href")) ?: return@mapNotNull null
             val recPosterUrl = fixUrlNull(it.selectFirst("img")?.attr("data-src")) ?:
             fixUrlNull(it.selectFirst("img")?.attr("src"))
-            val puan      = it.selectFirst("span.imdb")?.text()?.trim()
 
             newTvSeriesSearchResponse(recName, recHref, TvType.TvSeries) {
                 this.posterUrl = recPosterUrl
-                this.score     = Score.from10(puan)
             }
         }
 
@@ -200,7 +193,6 @@ class HDFilmCehennemi : MainAPI() {
                 this.year            = year
                 this.plot            = description
                 this.tags            = tags
-                this.score           = Score.from10(rating)
                 this.recommendations = recommendations
                 addActors(actors)
                 addTrailer(trailer)
@@ -214,7 +206,6 @@ class HDFilmCehennemi : MainAPI() {
                 this.year            = year
                 this.plot            = description
                 this.tags            = tags
-                this.score = Score.from10(rating)
                 this.recommendations = recommendations
                 addActors(actors)
                 addTrailer(trailer)
