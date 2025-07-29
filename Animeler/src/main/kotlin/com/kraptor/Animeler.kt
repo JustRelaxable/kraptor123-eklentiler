@@ -2,11 +2,10 @@
 
 package com.kraptor
 
-import android.util.Log
+import com.lagradost.api.Log
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
-import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -189,7 +188,6 @@ class Animeler : MainAPI() {
                 this.plot = description
                 this.year = year
                 this.tags = tags
-                this.score = Score.from10(rating)
                 this.duration = duration
                 this.recommendations = recommendations
                 addTrailer(trailer)
@@ -200,7 +198,6 @@ class Animeler : MainAPI() {
                 this.plot = description
                 this.year = year
                 this.tags = tags
-                this.score = Score.from10(rating)
                 this.duration = duration
                 this.recommendations = recommendations
                 this.episodes = episodeMap
@@ -331,7 +328,7 @@ class Animeler : MainAPI() {
                                         }
                                     }
                                 } catch (e: Exception) {
-                                    Log.e("Animeler", "Error loading video for key $key", e)
+                                    Log.e("Animeler", "Error loading video for key $key")
                                 }
                             }
                         }.toList().awaitAll()
@@ -352,7 +349,7 @@ class Animeler : MainAPI() {
             }
 
         } catch (e: Exception) {
-            Log.e("Animeler", "Error loading links", e)
+            Log.e("Animeler", "Error loading links")
             return false
         }
     }
