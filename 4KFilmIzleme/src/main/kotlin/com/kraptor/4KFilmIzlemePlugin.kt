@@ -2,12 +2,12 @@
 package com.kraptor
 
 import com.lagradost.cloudstream3.plugins.CloudstreamPlugin
-import com.lagradost.cloudstream3.plugins.Plugin
 import android.content.Context
+import com.lagradost.cloudstream3.plugins.BasePlugin
 
 @CloudstreamPlugin
-class `4KFilmIzlemePlugin`: Plugin() {
-    override fun load(context: Context) {
+class `4KFilmIzlemePlugin`: BasePlugin() {
+    override fun load() {
         registerMainAPI(`4KFilmIzleme`())
         registerExtractorAPI(ContentX())
         registerExtractorAPI(Hotlinger())
@@ -27,6 +27,5 @@ class `4KFilmIzlemePlugin`: Plugin() {
         registerExtractorAPI(SNDplayer())
         registerExtractorAPI(ORGDplayer())
         registerExtractorAPI(GoogleDriveExtractor())
-
     }
 }

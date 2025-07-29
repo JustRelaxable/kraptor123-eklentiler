@@ -2,14 +2,12 @@
 
 package com.kraptor
 
-import android.util.Base64
 import android.util.Log
 import org.jsoup.nodes.Element
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.utils.*
 import com.lagradost.cloudstream3.LoadResponse.Companion.addActors
 import com.lagradost.cloudstream3.LoadResponse.Companion.addTrailer
-import okio.ByteString.Companion.decodeBase64
 
 class `4KFilmIzleme` : MainAPI() {
     override var mainUrl = "https://www.4kfilmizleme.net"
