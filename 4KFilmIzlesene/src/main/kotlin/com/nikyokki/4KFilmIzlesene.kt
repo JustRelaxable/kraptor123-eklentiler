@@ -67,13 +67,11 @@ class `4KFilmIzlesene` : MainAPI() {
             val posterUrl = fixUrlNull(this.selectFirst("div.img img")?.attr("src"))
             return newMovieSearchResponse(title, href, TvType.Movie) {
                 this.posterUrl = posterUrl
-                this.score     = Score.from10(puan)
             }
         } else {
             val posterUrl = fixUrlNull(this.selectFirst("div.img img")?.attr("data-lazy-src"))
             return newMovieSearchResponse(title, href, TvType.Movie) {
                 this.posterUrl = posterUrl
-                this.score     = Score.from10(puan)
             }
         }
     }
@@ -107,7 +105,6 @@ class `4KFilmIzlesene` : MainAPI() {
             this.plot = description
             this.year = year
             this.tags = tags
-            this.score = Score.from10(rating)
             addActors(actors)
             addTrailer(trailer)
         }
